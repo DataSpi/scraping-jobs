@@ -3,6 +3,9 @@
 /reports/
 /__pycache__/
 
+# exclude data from source control by default
+# /data/
+
 
 
 # Byte-compiled / optimized / DLL files
@@ -82,8 +85,6 @@ target/
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
 
-# exclude data from source control by default
-/data/
 
 # Mac OS-specific storage files
 .DS_Store
