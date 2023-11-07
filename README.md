@@ -18,7 +18,7 @@ The work-flow of this project is resembled in the [scraper.py](scraper.py) files
     ![Alt text](figures/work-flow1.png)
 3. `extract_search_page`: Using BeautifulSoup to parse information from the html_soup
     ![Alt text](figures/work-flow2.png)
-4. `extract_job_links`: Getting the soup of the job_link pages & parse data from them. 
+4. `extract_job_links`: Getting the soup of the job_link pages & parse data from them.
     ![Alt text](figures/work-flow3.png)
 5. `merge_search_page_n_job_link`: Merge the df_search_page with df_job_link
 
@@ -26,4 +26,5 @@ The work-flow of this project is resembled in the [scraper.py](scraper.py) files
 
 [scraper.py](scraper.py) is just a source code file, all the execution of this source can be found in [data_collection.py](data_collection.py)
 
-The data collected then being saved as `.csv` files & being cleaned using the [cleaning.py](cleaning.py), after that, users can find the results in [EDA.ipynb ](EDA.ipynb )
+The data collected then being saved as `.csv` files & being cleaned using the [cleaning.py](cleaning.py), after that, users can find the results in [EDA.ipynb](EDA.ipynb )
+
