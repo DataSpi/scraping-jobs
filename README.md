@@ -8,6 +8,8 @@ This project creates a tool for scraping infomation from job-postings on CareerB
 
 # Workflow
 
+## Techniques
+
 ![Alt text](figures/full-process.png)
 The work-flow of this project is resembled in the [scraper.py](scraper.py) files, which contains these main functions:
 
@@ -20,6 +22,8 @@ The work-flow of this project is resembled in the [scraper.py](scraper.py) files
     ![Alt text](figures/work-flow3.png)
 5. `merge_search_page_n_job_link`: Merge the df_search_page with df_job_link
 
-> [scraper.py](scraper.py) is just a source code file, all the execution of this code can be found in [data_collection.py](data_collection.py)
+## Execution
 
-> The data collected then being saved as `.csv` files & being cleaned using the [cleaning.py](cleaning.py), after that, users can find the results in [EDA.ipynb ](EDA.ipynb )
+[scraper.py](scraper.py) is just a source code file, all the execution of this code can be found in [data_collection.py](data_collection.py)
+
+The data collected then being saved as `.csv` files & being cleaned using the [cleaning.py](cleaning.py), after that, users can find the results in [EDA.ipynb ](EDA.ipynb )
