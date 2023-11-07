@@ -9,7 +9,7 @@ This project creates a tool for scraping infomation from job-postings on CareerB
 # Workflow
 
 ![Alt text](figures/full-process.png)
-The flow of work in this project can be found in [scraper.py](scraper.py), which contains these main function:
+The work-flow of this project is resembled in the [scraper.py](scraper.py) files, which contains these main functions:
 
 1. `get_soup`: Using Selenium to drive the browser.
 2. `get_search_soups`: Get the html_soup of the job-searching-page
@@ -19,5 +19,7 @@ The flow of work in this project can be found in [scraper.py](scraper.py), which
 4. `extract_job_links`: Getting the soup of the job_link pages & parse data from them. 
     ![Alt text](figures/work-flow3.png)
 5. `merge_search_page_n_job_link`: Merge the df_search_page with df_job_link
+
+> [scraper.py](scraper.py) is just a source code file, all the execution of this code can be found in [data_collection.py](data_collection.py)
 
 > The data collected then being saved as `.csv` files & being cleaned using the [cleaning.py](cleaning.py), after that, users can find the results in [EDA.ipynb ](EDA.ipynb )
