@@ -1,4 +1,4 @@
-import src.scraper as scp
+import scraper as scp
 
 # look at this for reference to pass data in the arguments of get_search_soup() right. 
 sample_urls=[
@@ -10,16 +10,16 @@ sample_urls=[
 
 # get search_soup
 search_soups = scp.get_search_soups(
-    key_word='xuat-nhap-khau',
-    category_code='c18',
-    page_num=2,
+    key_word='van-chuyen-giao-nhan-kho-van',
+    category_code='c33',
+    page_num=13,
     load_sleep_time=10,
     scroll_sleep_time=1
 )
 # Parsing data from the search_pages
 df_search_page = scp.extract_search_page(search_soups=search_soups)
 
-# Parsing data from the job_links
+# Scraping & parsing data from the job_links
 df_job_link = scp.extract_job_links(
     df_search_page=df_search_page,
     load_sleep_time=10,
@@ -36,4 +36,4 @@ final_df = scp.merge_search_page_n_job_link(
 )
 
 # Saving
-# final_df.to_csv('../data/raw/xnk/05112023-xuat-nhap-khau.csv', index=False)
+final_df.to_csv('../data/raw/warehouse/07112023-warehouse.csv', index=False)

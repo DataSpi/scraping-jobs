@@ -24,7 +24,6 @@ The work-flow of this project is resembled in the [scraper.py](src/scraper.py) f
 
 ## Execution
 
-[scraper.py](src/scraper.py) is just a source code file, all the execution of this source can be found in [data_collection.py](src/data_collection.py)
+[scraper.py](src/scraper.py) is a source code file, all the execution of the code source can be found in [data_collection.py](src/data_collection.py)
 
 The data collected then being saved as `.csv` files & being cleaned using the [cleaning.py](src/cleaning.py), after that, users can find the results in [EDA.ipynb](notebooks/EDA.ipynb)
-

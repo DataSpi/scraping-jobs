@@ -1,7 +1,7 @@
 # ignore folders for internal
 /mails/
-/internal-reports/
-
+/reports/
+/__pycache__/
 
 
 
