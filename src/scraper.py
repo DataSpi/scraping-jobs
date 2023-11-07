@@ -2,7 +2,6 @@ import pandas as pd
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import re
-import os
 import time
 
 
@@ -31,11 +30,6 @@ def get_soup(url, load_sleep_time, scroll_sleep_time):
     html_content = BeautifulSoup(html_content, 'html.parser')
 
     return html_content
-
-# soup=get_soup(url="https://careerbuilder.vn/vi/tim-viec-lam/sales-logistics.35BDC14E.html",
-#               load_sleep_time=5,
-#               scroll_sleep_time=1)
-# print(soup.text)
 
 
 def get_search_soups(key_word, category_code, page_num, load_sleep_time, scroll_sleep_time):
@@ -142,7 +136,6 @@ def extract_search_page(search_soups):
     return df_search_page
 
 
-# ------------------------------------------------------------
 # options for extract job_link w different html structure
 def support_extract_job_link1(job_url, load_sleep_time, scroll_sleep_time):
     """_summary_
@@ -197,7 +190,6 @@ def support_extract_job_link1(job_url, load_sleep_time, scroll_sleep_time):
 
     return support_dict
 
-
 def support_extract_job_link2(job_url, load_sleep_time, scroll_sleep_time):
     """_summary_
     Attempt 2 of getting the infos from the job_url
@@ -244,7 +236,6 @@ def support_extract_job_link2(job_url, load_sleep_time, scroll_sleep_time):
 
     return support_dict
 
-
 def support_extract_job_link3(job_url, load_sleep_time, scroll_sleep_time):
     # job_url="https://careerbuilder.vn/vi/tim-viec-lam/giam-doc-xuat-nhap-khau.35BDBFFA.html"
     detail_soup = get_soup(
@@ -266,10 +257,6 @@ def support_extract_job_link3(job_url, load_sleep_time, scroll_sleep_time):
     # Other infos, I will update later.
 
     return support_dict
-
-# job_url="https://careerbuilder.vn/vi/tim-viec-lam/giam-doc-xuat-nhap-khau.35BDBFFA.html"
-# support_extract_job_link3(job_url=job_url, load_sleep_time=10, scroll_sleep_time=1)
-
 
 def support_extract_job_link4(job_url, load_sleep_time, scroll_sleep_time):
     # job_url="https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-kinh-doanh-forwarding.35BDA00A.html"
@@ -294,12 +281,6 @@ def support_extract_job_link4(job_url, load_sleep_time, scroll_sleep_time):
     # Other infos, I will update later.
 
     return support_dict
-
-
-# job_url = "https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-kinh-doanh-forwarding.35BDA00A.html"
-# support_extract_job_link4(
-#     job_url=job_url, load_sleep_time=10, scroll_sleep_time=1)
-
 
 
 def extract_job_links(df_search_page, load_sleep_time, scroll_sleep_time):
@@ -393,25 +374,32 @@ def extract_job_links(df_search_page, load_sleep_time, scroll_sleep_time):
     df_job_link.columns = df_job_link.columns.str.strip()
     df_job_link = df_job_link.rename(columns=rename_dict)
     cols_for_editing = df_job_link.columns[df_job_link.columns != 'job_desc']
-    df_job_link[cols_for_editing] = df_job_link[cols_for_editing].applymap(lambda x: str(x)
-                                                                           .replace("['", "").replace("']", "")
-                                                                           .replace('  ', '')
-                                                                           .replace("'", "")
-                                                                           .replace('\n', '')
-                                                                           .replace('\t', '')
-                                                                           .replace('\\n', '')
-                                                                           .replace('\\t', '').strip()
-                                                                           )
+    df_job_link[cols_for_editing] = df_job_link[cols_for_editing].applymap(
+        lambda x: str(x)
+        .replace("['", "").replace("']", "")
+        .replace('  ', '')
+        .replace("'", "")
+        .replace('\n', '')
+        .replace('\t', '')
+        .replace('\\n', '')
+        .replace('\\t', '').strip()
+    )
     return df_job_link
 
 
-# ------------------------------------------------------------
 def merge_search_page_n_job_link(df_search_page, df_job_link):
     return df_search_page.merge(df_job_link, left_index=True, right_index=True)
 
 
 # -----------------------------------//-----------------------------------
 # testing the function on https://careerbuilder.vn/viec-lam/Data-Analyst-k-vi.html
+
+# soup=get_soup(url="https://careerbuilder.vn/vi/tim-viec-lam/sales-logistics.35BDC14E.html",
+#               load_sleep_time=5,
+#               scroll_sleep_time=1)
+# print(soup.text)
+
+
 # search_soups = get_search_soups(key_word='data-analyst',
 #                                 category_code='k',
 #                                 page_num=2,
@@ -438,4 +426,13 @@ def merge_search_page_n_job_link(df_search_page, df_job_link):
 # #
 # merge_search_page_n_job_link(df_search_page=df_search_page,
 #                              df_job_link=df_job_link) # this looks beautiful
+
+
+# job_url="https://careerbuilder.vn/vi/tim-viec-lam/giam-doc-xuat-nhap-khau.35BDBFFA.html"
+# support_extract_job_link3(job_url=job_url, load_sleep_time=10, scroll_sleep_time=1)
+
+
+# job_url = "https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-kinh-doanh-forwarding.35BDA00A.html"
+# support_extract_job_link4(
+#     job_url=job_url, load_sleep_time=10, scroll_sleep_time=1)
 
