@@ -1,19 +1,18 @@
-
 import pandas as pd
 import numpy as np
 from pandasql import sqldf
 import re
 import datetime as dt
 
-df = pd.read_csv('../data/raw/warehouse/20231107-warehouse.csv')
+df = pd.read_csv('../data/raw/data-jobs/20231911-data-analyst.csv')
 # df = pd.read_csv('../data/raw/xnk/20231105-xuat-nhap-khau.csv')
-today = dt.date(2023, 11, 7)
+today = dt.date(2023, 11, 19)
 
 
 ################################################
-# remove unnecessary columns
-rm_cols = ['Phương thức làm việc']
-df.drop(rm_cols, axis='columns', inplace=True)
+# remove unnecessary columns (at 19/11/2023 I find that somehow I dont need to remove this column anymore.)
+# rm_cols = ['Phương thức làm việc']
+# df.drop(rm_cols, axis='columns', inplace=True)
 
 # removing redundant character
 df.job_title = df.job_title.str.replace('(Mới)', '').str.strip().str.lower()
@@ -130,4 +129,4 @@ df_cleaned = df.drop(['industry', 'exp', ], axis='columns')
 df_cleaned['job_id'] = df_cleaned.job_link.str.split('.').apply(lambda x: x[-2])
 
 # saving
-# df_cleaned.to_csv('../data/processed/warehouse/20231107-warehouse.csv', index=False)
+df_cleaned.to_csv('../data/processed/data-jobs/20231911-data-analyst.csv', index=False)

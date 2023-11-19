@@ -10,9 +10,9 @@ sample_urls=[
 
 # get search_soup
 search_soups = scp.get_search_soups(
-    key_word='van-chuyen-giao-nhan-kho-van',
-    category_code='c33',
-    page_num=13,
+    key_word='Data-Analyst',
+    category_code='k',
+    page_num=4,
     load_sleep_time=10,
     scroll_sleep_time=1
 )
@@ -36,4 +36,4 @@ final_df = scp.merge_search_page_n_job_link(
 )
 
 # Saving
-final_df.to_csv('../data/raw/warehouse/07112023-warehouse.csv', index=False)
+# final_df.to_csv('../data/raw/20231911-data-analyst.csv', index=False)
