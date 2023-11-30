@@ -4,7 +4,8 @@ from pandasql import sqldf
 import re
 import datetime as dt
 
-df = pd.read_csv('../data/raw/data-jobs/20231911-data-analyst.csv')
+# df = pd.read_csv('../data/raw/data-jobs/20231119-data-jobs.csv')
+df = pd.read_csv('../data/raw/data-jobs/20231119-data-analyst.csv')
 # df = pd.read_csv('../data/raw/xnk/20231105-xuat-nhap-khau.csv')
 today = dt.date(2023, 11, 19)
 
@@ -60,9 +61,13 @@ df.expire_date = df['expire_date'].apply(
 
 ################################################
 # working with salary, create sal_min, sal_max
-df.salary = df.salary.str.replace(",000,000", ' Tr').str.replace(',000', '000')
 
-df[['sal_min', 'sal_max']] = df.salary.str.replace(",", ".").str.split('-', expand=True)
+## replace the confusing thousand seperator
+df.salary = df.salary.astype('str')
+df.salary = df.salary.str.replace(",000,000", ' Tr').str.replace(',000', '000')
+df['salary'] = df['salary'].apply(lambda x: x.replace(",", "").replace(".", "") if 'USD' in str(x) else x.replace(",", "."))
+
+df[['sal_min', 'sal_max']] = df.salary.str.split('-', expand=True)
 df.sal_min = df.sal_min.str.extract(r'(\d+\.?\d*)', expand=False).replace('', np.nan).astype(float)
 df.sal_max = df.sal_max.str.extract(r'(\d+\.?\d*)', expand=False).replace('', np.nan).astype(float)
 
@@ -77,6 +82,8 @@ for i in df.query('sal_min.notna() & sal_max.isna()').index:
     elif 'Lên đến' in df.salary[i]:
         df.loc[i, 'sal_max'] = df.loc[i, 'sal_min']
         df.loc[i, 'sal_min'] = np.nan
+
+
 # df[['sal_min', 'sal_max', 'currency']]
 
 
@@ -129,4 +136,4 @@ df_cleaned = df.drop(['industry', 'exp', ], axis='columns')
 df_cleaned['job_id'] = df_cleaned.job_link.str.split('.').apply(lambda x: x[-2])
 
 # saving
-df_cleaned.to_csv('../data/processed/data-jobs/20231911-data-analyst.csv', index=False)
+# df_cleaned.to_csv('../data/processed/data-jobs/20231119-data-analyst.csv', index=False)
