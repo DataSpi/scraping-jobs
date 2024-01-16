@@ -16,9 +16,9 @@ sample_urls=[
 
 # get search_soup
 search_soups = scp.get_search_soups(
-    key_word='du-lieu',
-    category_code='k',
-    page_num=10,
+    key_word='xuat-nhap-khau',
+    category_code='c18',
+    page_num=13,
     load_sleep_time=10,
     scroll_sleep_time=1
 )
@@ -35,7 +35,7 @@ for index, title in enumerate(df_search_page.job_title.tolist()):
 
 # Scraping & parsing data from the job_links
 df_job_link = scp.extract_job_links(
-    df_search_page=df_search_page[:200], # all the jobs after the 4th page does not seem relevant to the keyword anymore. 
+    df_search_page=df_search_page, # all the jobs after the 4th page does not seem relevant to the keyword anymore. 
     load_sleep_time=8,
     scroll_sleep_time=1
 )
@@ -50,4 +50,4 @@ final_df = scp.merge_search_page_n_job_link(
 )
 
 # Saving
-final_df.to_csv('../data/raw/data-jobs/20231129-data-jobs.csv', index=False)
+final_df.to_csv('../data/raw/xnk/20240115-xuat-nhap-khau.csv', index=False)

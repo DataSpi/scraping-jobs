@@ -5,9 +5,10 @@ import re
 import datetime as dt
 
 # df = pd.read_csv('../data/raw/data-jobs/20231119-data-jobs.csv')
-df = pd.read_csv('../data/raw/data-jobs/20231119-data-analyst.csv')
+# df = pd.read_csv('../data/raw/data-jobs/20231119-data-analyst.csv')
 # df = pd.read_csv('../data/raw/xnk/20231105-xuat-nhap-khau.csv')
-today = dt.date(2023, 11, 19)
+df = pd.read_csv('../data/raw/xnk/20240115-xuat-nhap-khau.csv')
+today = dt.date(2024, 1, 15)
 
 
 ################################################
@@ -136,4 +137,4 @@ df_cleaned = df.drop(['industry', 'exp', ], axis='columns')
 df_cleaned['job_id'] = df_cleaned.job_link.str.split('.').apply(lambda x: x[-2])
 
 # saving
-# df_cleaned.to_csv('../data/processed/data-jobs/20231119-data-analyst.csv', index=False)
+df_cleaned.to_csv('../data/processed/xnk/20240115-xuat-nhap-khau.csv', index=False)
